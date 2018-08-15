@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Rotation
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+namespace Rotation {
+
+    class Program {
+
+        static void Main(string[] args) {
             int[] list1 = { 1, 2, 3, 4, 5, 6, 7 };
             int[] list2A = { 4, 5, 6, 7, 8, 1, 2, 3 };
             // IsRotation(list1, list2A) should return false.
@@ -34,40 +33,35 @@ namespace Rotation
 
         }
 
-        static bool IsRotation(int[] list1, int[] list2)
-        {
-            if (list1.Length != list2.Length)
-            {
+        static bool IsRotation(int[] list1, int[] list2) {
+            if (list1.Length != list2.Length) {
                 return false;
             }
 
             int key = list1[0];
             int key_i = -1;
 
-            for (int i = 0; i <= list2.Length - 1; i++)
-            {
-                if (list2[i] == key)
-                {
+            for (int i = 0; i <= list2.Length - 1; i++) {
+                if (list2[i] == key) {
                     key_i = i;
                     break;
                 }
             }
 
-            if (key_i == -1)
-            {
+            if (key_i == -1) {
                 return false;
             }
 
-            for (int i = 0; i <= list1.Length - 1; i++)
-            {
+            for (int i = 0; i <= list1.Length - 1; i++) {
                 int j = (key_i + i) % list1.Length;
-                if (list1[i] != list2[j])
-                {
+                if (list1[i] != list2[j]) {
                     return false;
                 }
             }
 
             return true;
         }
+
     }
+
 }

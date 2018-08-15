@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
-namespace MinesweeperExpand
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+namespace MinesweeperExpand {
+
+    class Program {
+
+        static void Main(string[] args) {
             Console.WriteLine("X = Bomb\nE = Expanded tile\n");
             // NOTE: The following input values will be used for testing your solution.
             int[][] field1 = {
@@ -48,33 +46,25 @@ namespace MinesweeperExpand
             PrintArray(Click(field2, 4, 4, 1, 3));
         }
 
-        static int[][] Click(int[][] field, int numRows, int numCols, int givenI, int givenJ)
-        {
+        static int[][] Click(int[][] field, int numRows, int numCols, int givenI, int givenJ) {
             Console.WriteLine("Clicked (" + givenI + "," + givenJ + ")");
             Queue<int[]> toCheck = new Queue<int[]>();
-            if (field[givenI][givenJ] == 0)
-            {
+            if (field[givenI][givenJ] == 0) {
                 field[givenI][givenJ] = -2;
                 int[] coordinates = { givenI, givenJ };
                 toCheck.Enqueue(coordinates);
-            }
-            else
-            {
+            } else {
                 return field;
             }
 
-            while (toCheck.Count != 0)
-            {
+            while (toCheck.Count != 0) {
                 int[] currentCoordinates = toCheck.Dequeue();
                 int currentI = currentCoordinates[0];
                 int currentJ = currentCoordinates[1];
 
-                for (int i = currentI - 1; i < currentI + 2; i++)
-                {
-                    for (int j = currentJ - 1; j < currentJ + 2; j++)
-                    {
-                        if (0 <= i && i < numRows && 0 <= j && j < numCols && field[i][j] == 0)
-                        {
+                for (int i = currentI - 1; i < currentI + 2; i++) {
+                    for (int j = currentJ - 1; j < currentJ + 2; j++) {
+                        if (0 <= i && i < numRows && 0 <= j && j < numCols && field[i][j] == 0) {
                             field[i][j] = -2;
                             int[] coordinates = { i, j };
                             toCheck.Enqueue(coordinates);
@@ -85,25 +75,20 @@ namespace MinesweeperExpand
             return field;
         }
 
-        static void PrintArray(int[][] arrayToPrint)
-        {
+        static void PrintArray(int[][] arrayToPrint) {
             int x = arrayToPrint.Length;
             int y = arrayToPrint[0].Length;
 
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    // Fix bomb formatting
-                    if (arrayToPrint[i][j] == -1)
-                    {
+            for (int i = 0; i < x; i++) {
+                for (int j = 0; j < y; j++) {
+                    // Fix formatting
+                    if (arrayToPrint[i][j] == -1) {
+                        // Bomb
                         Console.Write("X ");
-                    } else if (arrayToPrint[i][j] == -2)
-                    {
+                    } else if (arrayToPrint[i][j] == -2) {
+                        // Expanded space
                         Console.Write("E ");
-                    }
-                    else
-                    {
+                    } else {
                         Console.Write(arrayToPrint[i][j] + " ");
                     }
                 }
@@ -113,5 +98,7 @@ namespace MinesweeperExpand
 
             Console.Write("\n");
         }
+
     }
+
 }
